@@ -39,7 +39,7 @@
       data = ames_train, 
       method = "knn", 
       trControl = cv, 
-      tuneGrid = hyper_grid,
+      tune_grid = hyper_grid,
       metric = "RMSE"
     )
     knn_fit
