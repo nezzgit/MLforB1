@@ -543,9 +543,6 @@ in terms of accuracy? = alternative 3
 
     - data leakage: in some way the process of modelling we affect the unseen observations with information from the training observations. Can skew dataset and impact your error.
 
-**From here on out codeblocks in lecture 3 are related to the
-Feature_engineering R file from the lecture.**
-
 When Y is skewed we want to transform it. Common transformation methods
 include - Log transformation (most common, doesn't function on
 0-values) - Box Cox transformation (most flexible, can be applied to
@@ -555,7 +552,7 @@ values)
 Predictions follow transformation scale (if we log transform result will
 also be log)
 
-### missing values
+### missing values 1 
 
 -   missing values can be informative (Kuhn and Johnson 2013)
 
@@ -570,10 +567,69 @@ also be log)
     NA variable as you cannot divide by zero. Be aware of random missing
     data occuring
 
+### Missing values 2
+
+-   Use plots to identify mising data bunch. useful for color coding
+
+### imputation 1
+
+Imputation is used for replacing missing values with our best guesses.
+
+Methods:
+
+-   Estimated statistics: Mean, Median, mode ( for categorical)
+
+-   K-nearest neighbours, Tree-based models (use knn to impute missing
+    value, use the average value of the x nearest neighbours to
+    estimate)
+
+**As Imputation is done within re-sampling it increases processing
+demands.**
+
+### imputation 2
+
+```{r}
+include_graphics("Imputation 2.png")
+```
+
+Mean imputation is a constant average, data doesn't get a nice fit
+
+KNN imputation estimates values better using other close values
+
+Bagged trees (decision-tree model?) Also gets a great fit. Preserves
+relationship.
+
+**From here on out codeblocks in lecture 3 are related to the
+Feature_engineering R file from the lecture.**
+
+### Feature filtering
+
+Why?
+
+-   Model with many features
+
+    -   Hard to interpret
+
+        -   Costly to compute (time, processing power)
+
+-   Some models are inflexible to non-formative predicotrs (e.g.,) the
+    lasso model and tree-based model). Others are negatively affected.
+
 ```{r}
 
-
+include_graphics("RMSE - with non form.png")
 ```
+
+Here we are trying ot undertadn how much of the error is impacted by our
+non informative errors. Our non informative erroes are our X's where we
+have many missing values or many invariable variables. If the data of
+the variables are missing or invariable it will have no impact on our
+DV.
+
+-   remove zero or near-zero variance features
+
+As seen on the graph, more zero or near-zero variance features increases
+RMSE
 
 # Tutorial 2
 
